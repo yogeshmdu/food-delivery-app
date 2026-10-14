@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shop admin - Madurai Mertal Meats</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--r:#1B3AA8;--y:#FFC72C;--n:#0F1B5C;--ink:#10173A;--mut:#5A6078;--bg:#F4F6FF}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 14px 'Bricolage Grotesque',system-ui,sans-serif}
+header{background:var(--r);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 24px;min-height:72px;flex-wrap:wrap}
+header b{font-size:20px;color:var(--y)}nav{display:flex;gap:4px}nav button{border:0;border-radius:20px;padding:10px 16px;background:none;color:#fff;font:600 13px 'Bricolage Grotesque',system-ui,sans-serif;cursor:pointer;min-height:44px}nav button.on{background:var(--y);color:var(--n)}
+.open{background:var(--y);color:var(--n);font-weight:700;border-radius:20px;padding:8px 16px}
+main{padding:24px}.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.col h3{margin:0 0 12px;display:flex;gap:8px;align-items:center}.col h3 i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.oc{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;display:flex;flex-direction:column;gap:6px}.oc .t{display:flex;justify-content:space-between;font-weight:700;font-size:15px}.oc .t span+span{color:var(--r)}.oc small{color:var(--mut)}
+.btns{display:flex;gap:8px;margin-top:4px}button.b{border:0;border-radius:14px;background:var(--y);color:var(--n);font-weight:700;padding:8px 18px;min-height:44px;cursor:pointer}button.b.o{background:#fff;color:var(--r);border:2px solid var(--r)}
+table{width:100%;background:#fff;border-radius:16px;border-collapse:collapse;overflow:hidden}td,th{padding:12px;text-align:left;border-bottom:1px solid #E3E6F2}input.pr{width:90px;border:1px solid #D5DAEC;border-radius:10px;padding:8px}
+.login{max-width:340px;margin:80px auto;background:#fff;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:12px}.login input{border:1px solid #D5DAEC;border-radius:12px;padding:12px}
+.empty{color:var(--mut);padding:8px}
+</style></head><body>
+<header><b>Madurai Mertal Meats</b><nav><button id="t1" class="on">Live orders</button><button id="t2">Products</button></nav><span class="open" id="cnt">Shop admin</span></header>
+<main id="m"></main>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let key=localStorage.mm_key||'',tab=1,orders=[],prods=[],seen=-1;
+const H=()=>({'Content-Type':'application/json','x-admin-key':key});
+const NEXT={placed:null,accepted:['packing','Start packing'],packing:['out_for_delivery','Out for delivery'],out_for_delivery:['delivered','Mark delivered']};
+function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator();o.connect(a.destination);o.frequency.value=880;o.start();o.stop(a.currentTime+.25)}catch{}}
+function login(msg){document.getElementById('m').innerHTML=`<div class="login"><b>Admin key</b>${msg?`<div style="color:#9B1C1C">${msg}</div>`:''}<input id="k" type="password" placeholder="Enter admin key"><button class="b" id="go">Open</button></div>`;
+ document.getElementById('go').onclick=()=>{key=document.getElementById('k').value;localStorage.mm_key=key;refresh()}}
+async function refresh(){
+ const r=await fetch('/api/admin/orders',{headers:H()}); if(r.status===401)return login(key?'Wrong key.':'');
+ orders=await r.json(); prods=(await (await fetch('/api/menu')).json()).products;
+ const n=orders.filter(o=>o.status==='placed').length; if(seen>=0&&n>seen)beep(); seen=n;
+ document.getElementById('cnt').textContent=n+' new order'+(n===1?'':'s'); draw();}
+const oc=o=>{const nx=NEXT[o.status];return `<div class="oc"><div class="t"><span>#${o.id}</span><span>Rs. ${o.total}</span></div><small>${esc(o.customer.name)}, ${esc(o.customer.phone)}</small><small>${esc(o.customer.address)}</small><div>${o.items.map(i=>esc(i.name)+' '+esc(i.unit)+' x'+i.qty).join(', ')}</div><small>${esc(o.slot)} - ${esc(o.payment)}</small>
+<div class="btns">${o.status==='placed'?`<button class="b o" data-i="${o.id}" data-s="rejected">Reject</button><button class="b" data-i="${o.id}" data-s="accepted">Accept</button>`:nx?`<button class="b" data-i="${o.id}" data-s="${nx[0]}">${nx[1]}</button>`:''}</div></div>`};
+function draw(){
+ const m=document.getElementById('m');
+ if(tab===1){const col=(t,c,f)=>{const l=orders.filter(o=>f.includes(o.status));return `<div class="col"><h3><i style="background:${c}"></i>${t} (${l.length})</h3>${l.map(oc).join('')||'<div class="empty">None</div>'}</div>`};
+  m.innerHTML=`<div class="cols">${col('New','#1B3AA8',['placed'])}${col('In kitchen','#FFC72C',['accepted','packing'])}${col('Out for delivery','#0F1B5C',['out_for_delivery'])}${col('Done','#9aa3c7',['delivered','rejected'])}</div>`;
+  m.querySelectorAll('button[data-i]').forEach(b=>b.onclick=async()=>{await fetch('/api/admin/orders/'+b.dataset.i,{method:'PATCH',headers:H(),body:JSON.stringify({status:b.dataset.s})});refresh()});}
+ else{m.innerHTML=`<table><tr><th>Item</th><th>Unit</th><th>Price (Rs.)</th><th>In stock</th></tr>${prods.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.unit)}</td><td><input class="pr" type="number" min="1" value="${p.price}" data-p="${p.id}"></td><td><input type="checkbox" ${p.inStock?'checked':''} data-s="${p.id}" aria-label="In stock"></td></tr>`).join('')}</table>`;
+  m.querySelectorAll('input[data-p]').forEach(i=>i.onchange=()=>fetch('/api/admin/products/'+i.dataset.p,{method:'PATCH',headers:H(),body:JSON.stringify({price:i.value})}));
+  m.querySelectorAll('input[data-s]').forEach(i=>i.onchange=()=>fetch('/api/admin/products/'+i.dataset.s,{method:'PATCH',headers:H(),body:JSON.stringify({inStock:i.checked})}));}}
+document.getElementById('t1').onclick=()=>{tab=1;t1.className='on';t2.className='';refresh()};
+document.getElementById('t2').onclick=()=>{tab=2;t2.className='on';t1.className='';draw()};
+refresh();setInterval(()=>{if(key&&tab===1&&!document.querySelector('.login'))refresh()},4000);
+</script></body></html>
