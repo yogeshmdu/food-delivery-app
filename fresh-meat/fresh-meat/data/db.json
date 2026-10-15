@@ -1,0 +1,199 @@
+{
+  "shop": {
+    "name": "Madurai Mertal Meats",
+    "address": "120/2 Mattuthavani, Bus stand opposite",
+    "phone": "8098621639",
+    "deliveryFee": 30,
+    "minOrder": 150,
+    "slots": [
+      "7 - 9 AM",
+      "9 - 11 AM",
+      "4 - 6 PM",
+      "6 - 8 PM"
+    ]
+  },
+  "categories": [
+    "Chicken",
+    "Mutton",
+    "Fish",
+    "Eggs"
+  ],
+  "products": [
+    {
+      "id": 1,
+      "cat": "Chicken",
+      "name": "Chicken Curry Cut",
+      "unit": "500 g",
+      "price": 130,
+      "inStock": true,
+      "image": "/assets/images/products/chicken_curry_cut.jpg"
+    },
+    {
+      "id": 2,
+      "cat": "Chicken",
+      "name": "Chicken Boneless",
+      "unit": "500 g",
+      "price": 220,
+      "inStock": true,
+      "image": "/assets/images/products/chicken_boneless.jpg"
+    },
+    {
+      "id": 3,
+      "cat": "Chicken",
+      "name": "Chicken Biryani Cut",
+      "unit": "1 kg",
+      "price": 250,
+      "inStock": true,
+      "image": "/assets/images/products/chicken_biryani_cut.jpg"
+    },
+    {
+      "id": 4,
+      "cat": "Chicken",
+      "name": "Chicken Wings",
+      "unit": "500 g",
+      "price": 160,
+      "inStock": true,
+      "image": "/assets/images/products/chicken_wings.jpg"
+    },
+    {
+      "id": 5,
+      "cat": "Chicken",
+      "name": "Country Chicken",
+      "unit": "1 kg",
+      "price": 420,
+      "inStock": true,
+      "image": "/assets/images/products/country_chicken.jpg"
+    },
+    {
+      "id": 6,
+      "cat": "Mutton",
+      "name": "Mutton Curry Cut",
+      "unit": "500 g",
+      "price": 390,
+      "inStock": true,
+      "image": "/assets/images/products/mutton_curry_cut.jpg"
+    },
+    {
+      "id": 7,
+      "cat": "Mutton",
+      "name": "Mutton Boneless",
+      "unit": "500 g",
+      "price": 480,
+      "inStock": true,
+      "image": "/assets/images/products/mutton_boneless.jpg"
+    },
+    {
+      "id": 8,
+      "cat": "Mutton",
+      "name": "Mutton Liver",
+      "unit": "250 g",
+      "price": 160,
+      "inStock": true,
+      "image": "/assets/images/products/mutton_liver.jpg"
+    },
+    {
+      "id": 9,
+      "cat": "Fish",
+      "name": "Seer Fish Slices",
+      "unit": "500 g",
+      "price": 450,
+      "inStock": true,
+      "image": "/assets/images/products/seer_fish_slices.jpg"
+    },
+    {
+      "id": 10,
+      "cat": "Fish",
+      "name": "Rohu Fish",
+      "unit": "500 g",
+      "price": 180,
+      "inStock": true,
+      "image": "/assets/images/products/rohu_fish.jpg"
+    },
+    {
+      "id": 11,
+      "cat": "Fish",
+      "name": "Prawns",
+      "unit": "500 g",
+      "price": 380,
+      "inStock": true,
+      "image": "/assets/images/products/prawns.jpg"
+    },
+    {
+      "id": 12,
+      "cat": "Eggs",
+      "name": "Egg Tray",
+      "unit": "30 pcs",
+      "price": 210,
+      "inStock": true,
+      "image": "/assets/images/products/egg_tray.jpg"
+    },
+    {
+      "id": 13,
+      "cat": "Eggs",
+      "name": "Country Eggs",
+      "unit": "6 pcs",
+      "price": 66,
+      "inStock": true,
+      "image": "/assets/images/products/country_eggs.jpg"
+    }
+  ],
+  "orders": [
+    {
+      "id": "MM1001",
+      "customer": {
+        "name": "Yogesh",
+        "phone": "8098621639",
+        "address": "102, Boopathi muthu, chinna rajakoor, post yothakadai via madurai."
+      },
+      "items": [
+        {
+          "id": 1,
+          "name": "Chicken Curry Cut",
+          "unit": "500 g",
+          "price": 130,
+          "qty": 1
+        },
+        {
+          "id": 2,
+          "name": "Chicken Boneless",
+          "unit": "500 g",
+          "price": 220,
+          "qty": 1
+        },
+        {
+          "id": 5,
+          "name": "Country Chicken",
+          "unit": "1 kg",
+          "price": 420,
+          "qty": 1
+        },
+        {
+          "id": 6,
+          "name": "Mutton Curry Cut",
+          "unit": "500 g",
+          "price": 390,
+          "qty": 1
+        }
+      ],
+      "subtotal": 1160,
+      "deliveryFee": 30,
+      "total": 1190,
+      "slot": "9 - 11 AM",
+      "payment": "Cash",
+      "status": "placed",
+      "createdAt": "2026-10-15T10:38:34.270Z",
+      "timeline": [
+        {
+          "status": "placed",
+          "at": "2026-10-15T10:38:34.270Z"
+        }
+      ]
+    }
+  ],
+  "categoryImages": {
+    "Chicken": "/assets/images/categories/chicken.jpg",
+    "Mutton": "/assets/images/categories/mutton.jpg",
+    "Fish": "/assets/images/categories/fish.jpg",
+    "Eggs": "/assets/images/categories/eggs.jpg"
+  }
+}
