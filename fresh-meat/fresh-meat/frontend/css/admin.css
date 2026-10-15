@@ -1,0 +1,267 @@
+/* Shop Admin Dashboard Stylesheet */
+
+/* Header & Navigation Bar */
+header {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 24px;
+  min-height: 72px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+}
+
+header b {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: -0.3px;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+}
+
+nav button {
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 10px 18px;
+  background: transparent;
+  color: var(--color-text-inverse);
+  font: 600 13px var(--font-family-base);
+  cursor: pointer;
+  min-height: 44px;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+nav button:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+nav button.on {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+.open {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  padding: 8px 18px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Main Dashboard Container */
+main {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Kanban Columns Grid */
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.col {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  border: 1px solid var(--color-border-subtle);
+}
+
+.col h3 {
+  margin: 0 0 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.col h3 i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Order Cards */
+.oc {
+  background: var(--color-surface-white);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-subtle);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.oc:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.oc .t {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.oc .t span + span {
+  color: var(--color-primary);
+  font-size: 16px;
+}
+
+.oc small {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Action Buttons */
+.btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+button.b {
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  padding: 8px 18px;
+  min-height: 44px;
+  cursor: pointer;
+  flex: 1;
+  font-size: 13px;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+button.b:hover {
+  transform: translateY(-1px);
+  background-color: var(--color-accent-hover);
+}
+
+button.b.o {
+  background: var(--color-surface-white);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+button.b.o:hover {
+  background: var(--color-surface-muted);
+}
+
+/* Products Table */
+table {
+  width: 100%;
+  background: var(--color-surface-white);
+  border-radius: var(--radius-lg);
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-subtle);
+}
+
+th {
+  background: #ECEFFB;
+  color: var(--color-text-main);
+  font-weight: 700;
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--color-border-subtle);
+  font-size: 13px;
+}
+
+td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: 14px;
+}
+
+tr:hover td {
+  background-color: #F8FAFF;
+}
+
+input.pr {
+  width: 100px;
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  outline: none;
+}
+
+input.pr:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(27, 58, 168, 0.2);
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+/* Login Modal */
+.login {
+  max-width: 360px;
+  margin: 80px auto;
+  background: var(--color-surface-white);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.login b {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.login input {
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.login input:focus {
+  border-color: var(--color-primary);
+}
+
+.empty {
+  color: var(--color-text-muted);
+  padding: 20px 8px;
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+}

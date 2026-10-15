@@ -1,0 +1,73 @@
+/* Design Tokens & Theme Variables for Fresh to Home */
+:root {
+  /* Brand Colors */
+  --color-primary: #1B3AA8;
+  --color-primary-dark: #0F1B5C;
+  --color-accent: #FFC72C;
+  --color-accent-soft: #FFF3C2;
+  --color-accent-hover: #EBB21B;
+
+  /* Neutrals & Surfaces */
+  --color-bg-page: #DFE4F5;
+  --color-bg-app: #F4F6FF;
+  --color-surface-white: #FFFFFF;
+  --color-surface-muted: #E3E9FB;
+  --color-border-subtle: #E3E6F2;
+  --color-border-input: #D5DAEC;
+
+  /* Typography Colors */
+  --color-text-main: #10173A;
+  --color-text-muted: #5A6078;
+  --color-text-inverse: #FFFFFF;
+  --color-text-blue-subtle: #C9D3F5;
+
+  /* Status Colors */
+  --color-status-success: #059669;
+  --color-status-warning: #D97706;
+  --color-status-danger: #9B1C1C;
+  --color-status-danger-bg: #FDE8E8;
+
+  /* Typography */
+  --font-family-base: 'Bricolage Grotesque', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Shadows & Radius */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-pill: 9999px;
+
+  --shadow-sm: 0 2px 4px rgba(15, 27, 92, 0.05);
+  --shadow-md: 0 4px 12px rgba(15, 27, 92, 0.08);
+  --shadow-lg: 0 8px 24px rgba(15, 27, 92, 0.12);
+  --shadow-app: 0 20px 60px rgba(15, 27, 92, 0.25);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-base);
+  color: var(--color-text-main);
+  background-color: var(--color-bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
